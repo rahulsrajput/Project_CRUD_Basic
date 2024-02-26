@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block title %}Upload{% endblock %}
+{% block content %}
+<div class="row mt-5">
+    <div class="col-lg-6">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="UploadCSV" class="form-label">Upload CSV:</label>
+            <input type="file" class="form-control" id="UploadCSV" required name="UploadCSV">
+            
+            <input type="submit" value="Submit" class="btn btn-outline-dark mt-4">
+        </form>
+    </div>
+</div>
+{% endblock %}

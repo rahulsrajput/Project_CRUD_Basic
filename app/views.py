@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 
 from django.core.paginator import Paginator
+import csv
 
 # Create your views here.
 def home(request):
@@ -18,7 +19,7 @@ def home(request):
         obj.save()
         return HttpResponseRedirect('/')
 
-    customers_objs = Customer.objects.all()
+    customers_objs = Customer.objects.all().order_by('id')
     paginator = Paginator(customers_objs,3)
     # print(paginator)
 
@@ -52,3 +53,26 @@ def delete(request, id):
     obj.delete()
     messages.success(request, 'Deleted')
     return HttpResponseRedirect('/')
+
+
+def csv_(request):
+    try:
+        if request.method == "POST":
+            file = request.FILES['UploadCSV'].read().decode('utf-8').splitlines()
+            csv_reader = csv.DictReader(file)
+            
+            for row in csv_reader:
+                Customer.objects.create(
+                first = row['first'],
+                last = row['last'],
+                phone = row['phone'],
+                address = row['address']
+                )
+            messages.success(request, 'Imported')
+            return HttpResponseRedirect('/')
+        
+        return render(request, 'csv.html')
+    
+    except Exception:
+        messages.error(request, 'Invalid document')
+        return HttpResponseRedirect('/')
