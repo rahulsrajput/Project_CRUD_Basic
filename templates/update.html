@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+{% block title %}Update{% endblock %}
+{% block content %}
+<div class="col-lg-4 mt-5">
+    <h2>Update Customer Details</h2>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <label for="InputFirst" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="InputFirst" required name="InputFirst" value="{{object.first}}">
+
+        <label for="InputLast" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="InputLast" required name="InputLast" value="{{object.last}}">
+
+        <label for="InputPhone" class="form-label">Phone</label>
+        <input type="number" min="10" class="form-control" id="InputPhone" required name="InputPhone" value="{{object.phone}}">
+
+        <label for="InputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="InputAddress" required name="InputAddress" value="{{object.address}}">
+
+        <input type="submit" value="Update" class="btn btn-outline-dark mt-4">
+        
+        <a href="{% url 'home' %}" class="btn btn-outline-dark mt-4">Back</a>
+    </form>
+</div>
+{% endblock %}

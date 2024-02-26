@@ -21,7 +21,19 @@ def home(request):
 
 
 def update(request, id):
-    pass
+    if request.method == 'POST':
+        first = request.POST['InputFirst']
+        last = request.POST['InputLast']
+        phone = request.POST['InputPhone']
+        address = request.POST['InputAddress']
+
+        obj = Customer(pk=id, first=first, last=last, phone=phone, address=address)
+        obj.save()
+        messages.success(request,'Updated')
+        return HttpResponseRedirect('/')
+
+    object = Customer.objects.get(pk=id)
+    return render(request, 'update.html',context={'object':object})
 
 
 def delete(request, id):
