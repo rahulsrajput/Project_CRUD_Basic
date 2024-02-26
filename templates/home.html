@@ -22,6 +22,7 @@
             <input type="text" class="form-control" id="InputAddress" required name="InputAddress">
 
             <input type="submit" value="Add" class="btn btn-outline-dark mt-4">
+            <a href="{% url 'csv' %}" class="btn btn-outline-dark mt-4">Import CSV</a>
         </form>
     </div>
     
@@ -64,7 +65,7 @@
         {% if page_obj.has_previous %}
         <a href="?page={{page_obj.previous_page_number}}" class="btn btn-sm btn-outline-dark">Previous</a>
         {% endif %}
-        
+
     </div>
 </div>
 {% endblock %}
