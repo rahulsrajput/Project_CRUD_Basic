@@ -2,7 +2,7 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <div class="row justify-content-between">
-    
+
     <div class="col-lg-4 mt-5">
         <h2>Add Customer Details</h2>
 
@@ -25,8 +25,15 @@
             <a href="{% url 'csv' %}" class="btn btn-outline-dark mt-4">Import CSV</a>
         </form>
     </div>
-    
+
     <div class="col-lg-7 mt-5 table-responsive">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-info" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+        {% endif %}
         <table class="table">
             <thead>
                 <tr>
@@ -47,9 +54,11 @@
                     <td>{{i.phone}}</td>
                     <td>{{i.address}}</td>
                     <td>
-                        <a href="{% url 'update' i.id %}" style="color: #121211; margin-right: 20%;"><i class="fa-sharp fa-solid fa-user-pen"></i></a>
-                        <a href="{% url 'delete' i.id %}" style="color: #121211;"><i class="fa-sharp fa-solid fa-trash"></i></a>
-                        
+                        <a href="{% url 'update' i.id %}" style="color: #121211; margin-right: 20%;"><i
+                                class="fa-sharp fa-solid fa-user-pen"></i></a>
+                        <a href="{% url 'delete' i.id %}" style="color: #121211;"><i
+                                class="fa-sharp fa-solid fa-trash"></i></a>
+
                     </td>
                 </tr>
                 {% endfor %}
@@ -61,7 +70,7 @@
         {% endif %}
 
         <span>PageNumber: {{page_obj.number}}</span>
-        
+
         {% if page_obj.has_previous %}
         <a href="?page={{page_obj.previous_page_number}}" class="btn btn-sm btn-outline-dark">Previous</a>
         {% endif %}

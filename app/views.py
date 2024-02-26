@@ -20,7 +20,7 @@ def home(request):
         return HttpResponseRedirect('/')
 
     customers_objs = Customer.objects.all().order_by('id')
-    paginator = Paginator(customers_objs,3)
+    paginator = Paginator(customers_objs,5)
     # print(paginator)
 
     page_number = request.GET.get('page')
