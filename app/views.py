@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Customer
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -24,4 +25,7 @@ def update(request, id):
 
 
 def delete(request, id):
-    pass
+    obj = Customer.objects.get(pk=id)
+    obj.delete()
+    messages.success(request, 'Deleted')
+    return HttpResponseRedirect('/')
