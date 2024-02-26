@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Customer
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def home(request):
@@ -12,6 +13,7 @@ def home(request):
 
         obj = Customer(first=first, last=last, phone=phone, address=address)
         obj.save()
+        return HttpResponseRedirect('/')
 
     customers_objs = Customer.objects.all()
     return render(request,'home.html',context={'customers_objs':customers_objs})
