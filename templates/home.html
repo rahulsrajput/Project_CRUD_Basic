@@ -38,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for i in customers_objs %}
+                {% for i in page_obj %}
                 <tr>
                     <th scope="row">{{i.id}}</th>
                     <td>{{i.first}}</td>
@@ -54,6 +54,17 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}" class="btn btn-sm btn-outline-dark">Next</a>
+        {% endif %}
+
+        <span>PageNumber: {{page_obj.number}}</span>
+        
+        {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}" class="btn btn-sm btn-outline-dark">Previous</a>
+        {% endif %}
+        
     </div>
 </div>
 {% endblock %}

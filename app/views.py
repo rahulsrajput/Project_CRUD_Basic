@@ -3,6 +3,8 @@ from .models import Customer
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
+from django.core.paginator import Paginator
+
 # Create your views here.
 def home(request):
     if request.method == 'POST':
@@ -17,7 +19,16 @@ def home(request):
         return HttpResponseRedirect('/')
 
     customers_objs = Customer.objects.all()
-    return render(request,'home.html',context={'customers_objs':customers_objs})
+    paginator = Paginator(customers_objs,3)
+    # print(paginator)
+
+    page_number = request.GET.get('page')
+    print(page_number)
+
+    page_obj = paginator.get_page(page_number)
+    print(page_obj)
+
+    return render(request,'home.html',context={'page_obj':page_obj})
 
 
 def update(request, id):
