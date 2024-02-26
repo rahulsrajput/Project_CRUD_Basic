@@ -41,9 +41,9 @@
                 {% for i in customers_objs %}
                 <tr>
                     <th scope="row">{{i.id}}</th>
-                    <td>{{i.first_name}}</td>
-                    <td>{{i.last_name}}</td>
-                    <td>{{i.phone}</td>
+                    <td>{{i.first}}</td>
+                    <td>{{i.last}}</td>
+                    <td>{{i.phone}}</td>
                     <td>{{i.address}}</td>
                     <td>
                         <a href="{% url 'update' i.id %}" style="color: #121211; margin-right: 20%;"><i class="fa-sharp fa-solid fa-user-pen"></i></a>

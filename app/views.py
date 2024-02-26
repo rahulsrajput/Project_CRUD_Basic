@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Customer
 
 # Create your views here.
 def home(request):
@@ -7,11 +8,13 @@ def home(request):
         last = request.POST['InputLast']
         phone = request.POST['InputPhone']
         address = request.POST['InputAddress']
-        
         # print(f'{first},{last},{phone},{address}')
 
-        
-    return render(request,'home.html')
+        obj = Customer(first=first, last=last, phone=phone, address=address)
+        obj.save()
+
+    customers_objs = Customer.objects.all()
+    return render(request,'home.html',context={'customers_objs':customers_objs})
 
 
 def update(request, id):
